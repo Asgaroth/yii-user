@@ -41,9 +41,9 @@ class ProfileController extends Controller
 		if(isset($_POST['User']))
 		{
 			$model->attributes=$_POST['User'];
-			$profile->attributes=$_POST['Profile'];
+			$profile->attributes= Yii::app()->request->getPost('Profile', array());
 			
-			if($model->validate()&&$profile->validate()) {
+			if($model->validate() && $profile->validate()) {
 				$model->save();
 				$profile->save();
                 Yii::app()->user->updateSession();
