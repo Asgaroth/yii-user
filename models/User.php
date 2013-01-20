@@ -72,6 +72,15 @@ class User extends UActiveRecord
 		):array()));
 	}
 
+  /**
+   * @return array relational rules.
+   */
+  public function behaviors()
+  {
+        $behaviors = Yii::app()->getModule('user')->userBehaviors;
+        return $behaviors;
+  }
+
 	/**
 	 * @return array relational rules.
 	 */
