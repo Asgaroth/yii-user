@@ -24,10 +24,10 @@ class UserController extends Controller
 	public function accessRules()
 	{
 		return array(
-			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view'),
-				'users'=>array('*'),
-			),
+			array('allow',  // allow all users to perform 'view' actions
+        'actions'=>array('view'),
+        'users'=>array('@'),
+      ),
 			array('deny',  // deny all users
 				'users'=>array('*'),
 			),
@@ -50,6 +50,7 @@ class UserController extends Controller
 	 */
 	public function actionIndex()
 	{
+    die('puto');
 		$dataProvider=new CActiveDataProvider('User', array(
 			'criteria'=>array(
 		        'condition'=>'status>'.User::STATUS_BANNED,
