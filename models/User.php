@@ -130,16 +130,19 @@ class User extends UActiveRecord
                 'condition'=>'superuser=1',
             ),
             'notsafe'=>array(
-            	'select' => '*',
+            	'select' => 'id, username, password, email, activkey, create_at, lastvisit_at, superuser, status',
             ),
         );
     }
 
 	public function defaultScope()
     {
+        $attrs = Yii::app()->getModule('user')->additionalAttributes;
+        $attrs = implode(", user.", $attrs);
         return CMap::mergeArray(Yii::app()->getModule('user')->defaultScope,array(
             'alias'=>'user',
-            'select' => 'user.id, user.username, user.email, user.create_at, user.lastvisit_at, user.superuser, user.status',
+            'select' => 'user.id, user.username, user.email, user.create_at,
+                            user.lastvisit_at, user.superuser, user.status'.$attrs,
         ));
     }
 
