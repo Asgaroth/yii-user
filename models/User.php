@@ -135,14 +135,17 @@ class User extends UActiveRecord
         );
     }
 
-	public function defaultScope()
+   public function defaultScope()
     {
         $attrs = Yii::app()->getModule('user')->additionalAttributes;
-        $attrs = implode(", user.", $attrs);
+        if ($attrs) {
+            $attrs = implode(", user.", $attrs);
+            $attrs = ", user.".$attrs;
+        }
         return CMap::mergeArray(Yii::app()->getModule('user')->defaultScope,array(
             'alias'=>'user',
             'select' => 'user.id, user.username, user.email, user.create_at,
-                            user.lastvisit_at, user.superuser, user.status'.$attrs,
+                         user.lastvisit_at, user.superuser, user.status'.$attrs,
         ));
     }
 
